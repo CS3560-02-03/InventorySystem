@@ -16,7 +16,24 @@ public class InventoryItem {
     /**number of the inventory item in stock */
     protected int quantity;
 
-    public InventoryItem() {
+    /**
+     * Create a new Inventory Item
+     * @param id
+     * @param size
+     * @param color
+     * @param option
+     * @param quantity
+     */
+    public InventoryItem(int id, int size, int color, int option, int quantity) {
+        this.id = id;
+        this.size = size;
+        this.color = color;
+        this.option = option; 
+        this.quantity = quantity;
+    }
 
+    /**Restock the item */
+    public void Restock() {
+        //todo: implement
     }
 }

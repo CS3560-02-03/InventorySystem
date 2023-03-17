@@ -17,10 +17,32 @@ public class InventoryAlert {
     /**Is the alert fulfilled? */
     protected boolean fulfilled;
 
-    public InventoryAlert(int id, Date created, Date fulfilled, boolean isFulfilled) {
+    /**
+     * Create a new Inventory ALert
+     * @param id : ID for the alert
+     * @param created : Date the alert was created
+     */
+    //TODO: Overloads
+    public InventoryAlert(int id, Date created) {
         this.alertID = id;
         this.dateCreated = created;
-        this.dateFulfilled = fulfilled;
-        this.fulfilled = isFulfilled;
-    } 
+    }
+
+    public InventoryAlert(int id) {
+        this(id, new Date());
+    }
+
+    /**Fulfill the alert */
+    public void Fulfill() {
+        this.dateFulfilled = new Date();
+        this.fulfilled = true;
+    }
+
+    /**
+     * Get whether or not the alert has been fulfilled
+     * @return fulfilled
+     */
+    public boolean isFulfilled() {
+        return fulfilled;
+    }
 }
