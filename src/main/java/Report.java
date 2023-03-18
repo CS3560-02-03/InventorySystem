@@ -1,5 +1,4 @@
 package main.java;
-
 import java.util.Date;
 
 /**Class for storing information about reports */
@@ -16,4 +15,15 @@ public class Report {
 
     /**Additional information about the report */
     protected String reportInfo;
+
+    /** Stores time period of the data analyzed by the report */
+    protected Date[] timeFrame;
+
+    public Report(Product product, Date[] timeFrame){
+        //TODO: generate some id
+        dateCreated = new Date();
+        this.timeFrame = new Date[2];
+        this.timeFrame[0] = timeFrame[0];
+        this.timeFrame[1] = timeFrame[1];
+    }
 }
