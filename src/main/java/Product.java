@@ -23,4 +23,32 @@ public class Product {
         this.name = name;
         this.description = description;
     }
+
+    /**
+     * @return Description of product
+     */
+    public String getDescription(){
+        return description;
+    }
+
+    /**
+     * @return Name of product
+     */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * @param description Description of product you want to set
+     */
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    /**
+     * @param name Name of product you want to set
+     */
+    public void setName(String name){
+        this.name = name;
+    }
 }
