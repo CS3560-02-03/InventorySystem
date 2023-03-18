@@ -26,15 +26,18 @@ public class InventoryAlert {
     public InventoryAlert(int id, Date created) {
         this.alertID = id;
         this.dateCreated = created;
+        fulfilled = false;
     }
 
     public InventoryAlert(int id) {
         this(id, new Date());
+        fulfilled = false;
     }
 
     public InventoryAlert(){
         //generate random id
         //dateCreated = current date
+        fulfilled = false;
     }
 
     /**Fulfill the alert */
