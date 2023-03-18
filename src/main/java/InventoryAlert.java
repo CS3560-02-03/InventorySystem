@@ -53,4 +53,29 @@ public class InventoryAlert {
     public boolean isFulfilled() {
         return fulfilled;
     }
+
+    /**
+     * @return id of the InventoryAlert
+     */
+    public int getAlertID(){
+        return alertID;
+    }
+
+    /**
+     * @return The date on which the InventoryAlert was created
+     */
+    public Date getDateCreated(){
+        return dateCreated;
+    }
+
+    /**
+     * @return The date on which the InventoryAlert was fulfilled
+     */
+    public Date getDateFulfilled(){
+        return dateFulfilled;
+    }
+
+    
+
+
 }
