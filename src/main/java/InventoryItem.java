@@ -32,8 +32,13 @@ public class InventoryItem {
         this.quantity = quantity;
     }
 
-    /**Restock the item */
-    public void Restock() {
+    /**
+     * Restocks the item
+     * @param quantityAdded How many items were gained from the restock
+     */
+    public void Restock(int quantityAdded) {
         //todo: implement
+        quantity += quantityAdded;
     }
+
 }
