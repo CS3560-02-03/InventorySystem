@@ -52,4 +52,12 @@ public class InventoryItem {
 
     }
 
+    /**
+     * Returns if the inventory of the item is below the low inventory threshhold or not
+     * @return if the item has low inventory
+     */
+    public boolean isLowInventory(){
+        
+    }
+
 }
