@@ -26,6 +26,7 @@ public class InventoryItem {
      * @param color
      * @param option
      * @param quantity
+     * @param price
      */
     public InventoryItem(int id, int size, int color, int option, int quantity, double price) {
         this.id = id;
