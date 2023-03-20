@@ -15,6 +15,9 @@ public class InventoryItem {
 
     /**number of the inventory item in stock */
     protected int quantity;
+    
+    /**price of the item*/
+    protected double price;
 
     /**
      * Create a new Inventory Item
@@ -24,7 +27,7 @@ public class InventoryItem {
      * @param option
      * @param quantity
      */
-    public InventoryItem(int id, int size, int color, int option, int quantity) {
+    public InventoryItem(int id, int size, int color, int option, int quantity, double price) {
         this.id = id;
         this.size = size;
         this.color = color;
