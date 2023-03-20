@@ -8,4 +8,9 @@ public class OrderItem {
 
     /**Price the items were purchased for. */
     protected int purchasePrice;
+
+    public OrderItem(int quantity, int purchasePrice){
+        this.quantity = quantity;
+        this.purchasePrice = purchasePrice;
+    }
 }
