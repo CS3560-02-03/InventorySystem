@@ -38,7 +38,14 @@ public class InventoryItem {
      */
     public void Restock(int quantityAdded) {
         //todo: implement
-        quantity += quantityAdded;
+    }
+
+    /**
+     * 
+     * @param quantityRemoved How many items taken off of the inventory
+     */
+    public void pullInventory(int quantityRemoved){
+
     }
 
 }
