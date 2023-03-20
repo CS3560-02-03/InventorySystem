@@ -18,25 +18,11 @@ public class InventoryAlert {
     protected boolean fulfilled;
 
     /**
-     * Create a new Inventory ALert
-     * @param id : ID for the alert
-     * @param created : Date the alert was created
+     * Create a new Inventory Alert
      */
-    //TODO: Overloads
-    public InventoryAlert(int id, Date created) {
-        this.alertID = id;
-        this.dateCreated = created;
-        fulfilled = false;
-    }
-
-    public InventoryAlert(int id) {
-        this(id, new Date());
-        fulfilled = false;
-    }
-
-    public InventoryAlert(){
-        //generate random id
-        //dateCreated = current date
+    public InventoryAlert() {
+        //id = generate random id
+        //dateCreated = generate current date
         fulfilled = false;
     }
 
