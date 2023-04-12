@@ -20,6 +20,6 @@ public class InventoryManager {
     }
 
     private Report generateReport(Product product, Date[] timeFrame){
-
+        return new Report(product, timeFrame);
     }
 }

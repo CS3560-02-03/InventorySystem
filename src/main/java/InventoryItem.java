@@ -15,6 +15,9 @@ public class InventoryItem {
 
     /**number of the inventory item in stock */
     protected int quantity;
+
+    /**Stock threshold for triggering the low inventory alert */
+    protected int min_stock;
     
     /**price of the item*/
     protected double price;
@@ -57,7 +60,7 @@ public class InventoryItem {
      * @return if the item has low inventory
      */
     public boolean isLowInventory(){
-        
+        return (this.quantity <= this.min_stock);
     }
 
 }
