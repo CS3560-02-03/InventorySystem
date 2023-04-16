@@ -14,4 +14,11 @@ public class Warehouse {
 
     /**Email address of the warehouse */
     protected String email;
+
+    public Warehouse (String name, Address address, String phoneNumber, String email) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+    }
 }
