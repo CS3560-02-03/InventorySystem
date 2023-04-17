@@ -1,11 +1,12 @@
 package main.java;
 import java.util.Date;
+import main.java.utils.UniqueID;
 
 /**Class for storing information about reports */
 public class Report {
 
     /**ID of the report */
-    protected int id;
+    protected String id;
 
     /**Date the report was created */
     protected Date dateCreated;
@@ -20,7 +21,10 @@ public class Report {
     protected Date[] timeFrame;
 
     public Report(Product product, Date[] timeFrame){
-        //TODO: generate some id
+
+        
+        this.id = UniqueID.GenerateID(128);
+
         dateCreated = new Date();
         this.timeFrame = new Date[2];
         this.timeFrame[0] = timeFrame[0];

@@ -2,7 +2,6 @@ package main.java.ui.resource;
 import javax.swing.*;
 
 import java.awt.Color;
-import java.awt.color.*;;
 public final class AppColors {
 
     //Main Palette
