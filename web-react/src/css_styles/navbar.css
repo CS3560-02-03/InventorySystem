@@ -1,0 +1,133 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #0c0e13; 
+    padding-left: 20px;
+    /* height: 6vh; */
+    z-index: 100;
+}
+
+.navbar-branding {
+    cursor: pointer;
+    color:whitesmoke;
+    text-transform: uppercase;
+    letter-spacing: 4.8px;
+    font-size: 21px;
+    font-weight: 700;
+
+    width: 300px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar-brandname {
+    /* flex: 1; */
+    padding-left: 10px;
+}
+
+.navbar-logo {
+    height: 30px;
+    border-radius: 50%;
+}
+
+.navbar-menu {
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navbar-menu ul li {
+    transition: color 0.15s ease-in;
+}
+
+
+.navbar-menu ul li:hover {
+    color: #c1234f;
+}
+
+.nav-links {
+    /* flex: 1; */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    /* width: 70%; */
+}
+
+.nav-links a {
+    /* color: whitesmoke; */
+    text-decoration: none;
+    /* font-size: 14px; */
+    font-weight: 500;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+    padding-right: 20px;
+}
+
+.navbar-item {
+    cursor: pointer;
+    padding: 8px 12px 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    /* transition: color 0.15s; */
+
+    align-self: center;
+}
+
+.navbar-more {
+    cursor: pointer;
+    padding-right: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.15s;
+
+    /* flex:1; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    /* justify-content: space-around; */
+    gap: 8px;
+    margin-left: 15px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 700;    
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.navbar-hidden-login1 {
+    font-weight: 500;
+    display: none;
+}
+
+.navbar-hidden-login2{
+    font-weight: 500;
+    display: none;
+}
