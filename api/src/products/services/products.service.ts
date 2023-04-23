@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IProductService } from '../interfaces/products';
-import { Account } from 'src/utils/typeorm/entities/Account';
 import { ProductDetails, ProductTypeDetails, UpdateProductDetails, UpdateProductTypeDetails } from 'src/utils/types';
 import { Product } from 'src/utils/typeorm/entities/Product/Product';
 import { ProductType } from 'src/utils/typeorm/entities/Product/ProductType';
@@ -12,11 +11,11 @@ export class ProductService implements IProductService {
     constructor(
         @InjectRepository(Product) private readonly productRepo: Repository<Product>,
         @InjectRepository(ProductType) private readonly productTypeRepo: Repository<ProductType>,
+        
     ) {}
 
     async deleteProductType(productName: string): Promise<boolean> {
         const deleted = await this.productTypeRepo.delete({name: productName})
-        console.log(deleted)
         return deleted.affected > 0;
     }
 
@@ -29,6 +28,9 @@ export class ProductService implements IProductService {
         let newProdType = new ProductType();
         newProdType.name = typeDetails.name;
         newProdType.description = typeDetails.description;
+        if (typeDetails.thumbnailURL) {
+            newProdType.thumbnailURL = typeDetails.thumbnailURL;
+        }
         const saved = await this.productTypeRepo.save(newProdType);
         return saved;
     }
@@ -52,7 +54,7 @@ export class ProductService implements IProductService {
         console.log(`received details for new product is ${JSON.stringify(details)}`)
 
         const productType = await this.productTypeRepo.findOne({
-            where: { id: details.productTypeDetails.id }
+            where: { id: details.productType.id }
         });
         if (!productType) return null;
 
@@ -62,9 +64,9 @@ export class ProductService implements IProductService {
         newProd.name = details.name;
         newProd.description = details.description;
         newProd.price = details.price;
+        newProd.weight = details.weight;
         newProd.size = details.size;
         newProd.color = details.color;
-        newProd.weight = details.weight;
         newProd.stock = details.stock;
         newProd.alertStockNumber = details.alertStockNumber;
         
@@ -74,19 +76,33 @@ export class ProductService implements IProductService {
 
     async findProduct(productID: string) {
         console.log('Find Product by Product customID', productID);
-        return await this.productRepo.findOne({ where: {id: productID} });
+
+        return await this.productRepo.createQueryBuilder(`product`)
+        .leftJoinAndSelect('product.productType', 'productType')
+        .where({id: productID})
+        .getOne();
     }
 
-    updateProduct(product: Product, details: UpdateProductDetails) {
+    async updateProduct(product: Product, details: UpdateProductDetails) {
         console.log('Update Product');
-        
-        return this.productRepo.save({
+        const updated = await this.productRepo.save({
             ...product,
             ...details,
         });
+        return updated;
     }
 
-    /** fetch all the products exist in the database*/
+    async deleteProductWithID(productID: string): Promise<boolean> {
+        const deleted = await this.productRepo.delete({id: productID})
+        return deleted.affected > 0;
+    }
+
+    /** fetch all the products exist in the database
+     * const productsTest: ProductDetails[] = await this.productRepo.manager.query(`
+     *      SELECT product.*, productType.* FROM products product
+     *          LEFT JOIN product_types productType ON productType.id = product.productTypeId;
+     * `);
+    */
     async fetchAllProducts() {
         const products = await this.productRepo.createQueryBuilder(`product`)
         .leftJoinAndSelect('product.productType', 'productType')

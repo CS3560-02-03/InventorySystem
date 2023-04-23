@@ -1,4 +1,4 @@
-import { Entity, Column, Unique, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { ProductType } from './ProductType';
 
 @Entity({ name: 'products' })
@@ -14,7 +14,7 @@ export class Product {
     @Column()
     description: string;
 
-    @Column()
+    @Column({ type: 'float' })
     price: number;
 
     @Column()
@@ -23,7 +23,7 @@ export class Product {
     @Column()
     color: string;    
 
-    @Column()
+    @Column({ type: 'float' })
     weight: number;    
 
     @Column()
@@ -32,7 +32,10 @@ export class Product {
     @Column()
     alertStockNumber: number = 0;
 
-    @ManyToOne(() => ProductType, { onDelete: 'SET NULL' })
+    @Column({nullable: true})
+    thumbnailURL: string;
+
+    @ManyToOne(() => ProductType, { onDelete: 'CASCADE' })
     @JoinColumn()
     productType: ProductType | null;
 }

@@ -17,5 +17,5 @@ export interface IProductService {
     createProduct(details: ProductDetails): Promise<Product>;
     findProduct(productID: string): Promise<Product | undefined | null>;
     updateProduct(product: Product, details: UpdateProductDetails): Promise<Product>;
-
+    deleteProductWithID(productID: string): Promise<boolean>;
 }

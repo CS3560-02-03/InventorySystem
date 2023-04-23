@@ -9,6 +9,9 @@ export class ProductType {
     name: string;
 
     @Column({nullable: true})
-    description: string = ``;
+    description: string;
+    
+    @Column({nullable: true})
+    thumbnailURL: string;
 }
 
