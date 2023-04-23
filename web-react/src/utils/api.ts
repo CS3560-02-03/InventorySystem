@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { AccountDetails, OrderDetails, ProductDetails, ProductTypeDetails, UpdateOrderDetails, UpdateProductDetails, UpdateProductTypeDetails } from '../../../api/dist/utils/types';
+import { AccountDetails, ManufacturerDetails, OrderDetails, ProductDetails, ProductTypeDetails, UpdateOrderDetails, UpdateProductDetails, UpdateProductTypeDetails } from '../../../api/dist/utils/types';
 
 const CONFIG: AxiosRequestConfig = { withCredentials: true };
 
@@ -8,7 +8,8 @@ const API_URL = 'http://localhost:3001/api'
 enum ROUTES {
     ACCOUNT = 'accounts',
     PRODUCT = 'products',
-    ORDER = 'orders'
+    ORDER = 'orders',
+    MANUFACTURER = 'manufacturers'
 }
 
 enum BASIC_SERVICES {
@@ -75,3 +76,16 @@ export const putUpdateOrder = (orderID: string, details: UpdateOrderDetails) =>
 
 export const getFetchAllOrders = () =>
     axios.get<OrderDetails[]>(`${API_URL}/${ROUTES.ORDER}/all`, CONFIG);
+
+// manufacturers
+export const postCreateDummyManufacturers = () =>
+    axios.post<{ message: string }>(
+        `${API_URL}/${ROUTES.MANUFACTURER}/create/dummies`,
+        CONFIG
+    );
+
+export const getFetchAllManufacturers = () =>
+    axios.get<ManufacturerDetails[]>(
+        `${API_URL}/${ROUTES.MANUFACTURER}/all`,
+        CONFIG
+    );

@@ -1,36 +1,49 @@
 import { ProductDetails } from "../../../api/dist/utils/types";
 import { TableProductDetails } from "../utils/types";
 
-export const mockTableProductDetails: ProductDetails[] = [
+export const mockProductDetails: ProductDetails[] = [
     {
         id: '1',
-        name: 'T-Shirt',
-        description: 'A comfortable T-Shirt',
-        price: 15.99,
+        name: 'A4 Copy Paper',
+        description: 'High-quality A4 copy paper for everyday use',
+        price: 3.99,
         productType: {
-            name: `asd`,
-            description: `asd`
+            name: 'Copy Paper',
+            description: 'Standard paper for printing and copying',
         },
-        size: 'M',
-        color: 'Blue',
-        weight: 0.3,
-        stock: 120,
-        alertStockNumber: 10,
+        size: 'A4',
+        color: 'White',
+        weight: 2.5, // Weight in lbs
+        stock: 500,
+        alertStockNumber: 100,
+        manufacturer: {
+            id: 1,
+            name: 'PaperCo',
+            phoneNumber: '555-123-4567',
+            email: 'info@paperco.com',
+        },
     },
     {
         id: '2',
-        name: 'Jeans',
-        description: 'Slim-fit jeans',
-        price: 49.99,
+        name: 'Premium Cardstock',
+        description: 'Heavyweight cardstock for professional printing',
+        price: 12.99,
         productType: {
-            name: `asd`,
-            description: `asd`
+            name: 'Cardstock',
+            description: 'Thicker paper for high-quality printing',
         },
-        size: '32W x 32L',
-        color: 'Black',
-        weight: 0.8,
-        stock: 80,
-        alertStockNumber: 5,
+        size: '8.5 x 11 inches',
+        color: 'Ivory',
+        weight: 5, // Weight in lbs
+        stock: 250,
+        alertStockNumber: 50,
+        manufacturer: {
+            id: 2,
+            name: 'CardstockPro',
+            phoneNumber: '555-987-6543',
+            email: 'support@cardstockpro.com',
+        },
     },
-];
+  ];
+  
   

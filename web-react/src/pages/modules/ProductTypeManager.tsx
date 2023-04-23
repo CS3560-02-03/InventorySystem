@@ -336,7 +336,6 @@ const ProductTypeManager = () => {
                     </div>
                 </div>
             </Box>)}
-
             {value === `products` && (
             <React.Fragment>
                 {loadingProductDetails ? 
@@ -363,7 +362,6 @@ const ProductTypeManager = () => {
                 {/* Add the form JSX code inside the condition */}
                 {showForm && (<ProductInfoForm onAddProduct={handleAddProduct} />)}
             </React.Fragment>)}
-
             {value === `orders` &&
             <React.Fragment>
             {loadingOrders == true ? 

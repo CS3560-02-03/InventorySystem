@@ -517,15 +517,15 @@ const EditProductInfoPage = () => {
                 </React.Fragment>}
                 {value === `orders` &&
                 <React.Fragment>
-                {loadingOrders == true ? 
-                <div style={{"display": "flex"}}>
-                    <Spinner children={
-                        <MoonLoader color='white'/>
-                    }/>
-                </div>
-                :
-                <OrderDetailsTable orderDetails={orders.filter(order => order.orderProducts.some(orderProd => orderProd.product.id === productId))} onDelete={handleDeleteOrders}/>
-                }
+                    {loadingOrders == true ? 
+                    <div style={{"display": "flex"}}>
+                        <Spinner children={
+                            <MoonLoader color='white'/>
+                        }/>
+                    </div>
+                    :
+                    <OrderDetailsTable orderDetails={orders.filter(order => order.orderProducts.some(orderProd => orderProd.product.id === productId))} onDelete={handleDeleteOrders}/>
+                    }
                 </React.Fragment>
                 
                 }

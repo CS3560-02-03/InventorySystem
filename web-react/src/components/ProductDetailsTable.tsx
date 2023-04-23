@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridFooterContainer, GridPagination, GridRowSelectionModel, GridSlotsComponentsProps } from '@mui/x-data-grid';
-import { ProductDetails } from '../../../api/dist/utils/types';
+import { ManufacturerDetails, ProductDetails } from '../../../api/dist/utils/types';
 import { Button, IconButton } from '@mui/material';
-import { mockTableProductDetails } from '../_mocks_/productDetails';
+import { mockProductDetails } from '../_mocks_/productDetails';
 import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'id', headerName: 'ID', width: 150 },
     { field: 'name', headerName: 'Name', width: 150 },
     // { field: 'description', headerName: 'Description', width: 200 },
     { field: 'price', headerName: 'Price', type: 'number', width: 100 },
@@ -17,6 +17,15 @@ const columns: GridColDef[] = [
     { field: 'weight', headerName: 'Weight', type: 'number', width: 80 },
     { field: 'stock', headerName: 'Stock', type: 'number', width: 80 },
     { field: 'alertStockNumber', headerName: 'Alert#', type: 'number', width: 80, },
+    {
+        field: 'manufacturer',
+        headerName: 'Manufacturer',
+        width: 150,
+        valueFormatter: (params) => {
+            const manufacturer = params.value as ManufacturerDetails;
+            return manufacturer ? manufacturer.name : 'N/A';
+        },
+    },
 ];
 
 type ProductDetailsTableProps = {
