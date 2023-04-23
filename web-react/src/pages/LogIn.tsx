@@ -57,7 +57,7 @@ const LoginPage = () => {
                 <div className="main-container">
                     <div className="welcome-wrapper">
                         <div style={{ fontWeight: "700", color: "whitesmoke" }}>
-                            Welcome to Our Paper Company!
+                            Welcome to Dunder Mifflin!
                         </div>
                     </div>
 

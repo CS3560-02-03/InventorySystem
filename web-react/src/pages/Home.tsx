@@ -13,7 +13,7 @@ const HomePage = () => {
                         
                     </div>
                     <p>
-                        Our website offers a variety of services and features to help you accomplish your goals. 
+                        Dunder Mifflin offers a variety of products and services to help you accomplish your goals. 
                         Feel free to explore and make use of the resources available to you.
                     </p>
                     <p>
