@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { ProductType } from './ProductType';
+import { Manufacturer } from '../Manufacturer/Manufacturer';
 
 @Entity({ name: 'products' })
 @Unique([`id`])
@@ -38,4 +39,8 @@ export class Product {
     @ManyToOne(() => ProductType, { onDelete: 'CASCADE' })
     @JoinColumn()
     productType: ProductType | null;
+
+    @ManyToOne(() => Manufacturer, (manufacturer) => manufacturer.products, { onDelete: 'CASCADE' })
+    @JoinColumn()
+    manufacturer: Manufacturer | null;
 }

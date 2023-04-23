@@ -5,13 +5,15 @@ import { IProductService } from '../interfaces/products';
 import { ProductDetails, ProductTypeDetails, UpdateProductDetails, UpdateProductTypeDetails } from 'src/utils/types';
 import { Product } from 'src/utils/typeorm/entities/Product/Product';
 import { ProductType } from 'src/utils/typeorm/entities/Product/ProductType';
+import { Manufacturer } from 'src/utils/typeorm/entities/Manufacturer/Manufacturer';
+import { dummyManufacturers } from 'src/utils/mock_data/manufacturers';
 
 @Injectable()
 export class ProductService implements IProductService {
     constructor(
         @InjectRepository(Product) private readonly productRepo: Repository<Product>,
         @InjectRepository(ProductType) private readonly productTypeRepo: Repository<ProductType>,
-        
+        @InjectRepository(Manufacturer) private readonly manufacturerRepo: Repository<Manufacturer>,
     ) {}
 
     async deleteProductType(productName: string): Promise<boolean> {
@@ -57,6 +59,9 @@ export class ProductService implements IProductService {
             where: { id: details.productType.id }
         });
         if (!productType) return null;
+        const manufacturer = await this.manufacturerRepo.findOne({
+            where: { id: details.manufacturer.id }
+        })
 
         console.log('Create Product');
         let newProd = new Product();
@@ -71,6 +76,8 @@ export class ProductService implements IProductService {
         newProd.alertStockNumber = details.alertStockNumber;
         
         newProd.productType = productType;
+        newProd.manufacturer = manufacturer;
+        
         return await this.productRepo.save(newProd);
     }
 
@@ -79,6 +86,7 @@ export class ProductService implements IProductService {
 
         return await this.productRepo.createQueryBuilder(`product`)
         .leftJoinAndSelect('product.productType', 'productType')
+        .leftJoinAndSelect('product.manufacturer', 'manufacturer')
         .where({id: productID})
         .getOne();
     }
@@ -106,6 +114,7 @@ export class ProductService implements IProductService {
     async fetchAllProducts() {
         const products = await this.productRepo.createQueryBuilder(`product`)
         .leftJoinAndSelect('product.productType', 'productType')
+        .leftJoinAndSelect('product.manufacturer', 'manufacturer')
         .getMany();
         return products;
     }
@@ -114,6 +123,7 @@ export class ProductService implements IProductService {
     async fetchProductsWithTypeName(productTypeName: string) {
         const products = await this.productRepo.createQueryBuilder(`product`)
         .leftJoinAndSelect('product.productType', 'productType')
+        .leftJoinAndSelect('product.manufacturer', 'manufacturer')
         .where('productType.name = :productTypeName', {productTypeName: productTypeName})
         .getMany();
         return products;

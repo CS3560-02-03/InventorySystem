@@ -1,4 +1,5 @@
 import { Account } from "./typeorm/entities/Account";
+import { Manufacturer } from "./typeorm/entities/Manufacturer/Manufacturer";
 import { Order } from "./typeorm/entities/Orders/Order";
 import { OrderProduct } from "./typeorm/entities/Orders/OrderProduct";
 import { Product } from "./typeorm/entities/Product/Product";
@@ -9,5 +10,6 @@ export const entities = [
     Product,
     ProductType,
     Order,
-    OrderProduct
+    OrderProduct,
+    Manufacturer
 ];

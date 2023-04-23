@@ -13,11 +13,14 @@ import {
 import { BASIC_SERVICE_ACTIONS, ROUTES, SERVICES } from '../../utils/constants';
 import { IProductService } from '../interfaces/products';
 import { ProductDetails, ProductTypeDetails, UpdateProductDetails, UpdateProductTypeDetails } from 'src/utils/types';
+import { IManufacturerService } from 'src/manufacturers/interfaces/manufacturers';
+import { generateRandomString } from 'src/utils/misc/randomStringGenerator';
   
 @Controller(ROUTES.PRODUCT)
 export class ProductController {
     constructor(
         @Inject(SERVICES.PRODUCT) private readonly productService: IProductService,
+        @Inject(SERVICES.MANUFACTURER) private readonly manufacturerService: IManufacturerService,
     ) {}
 
     // PRODUCTS  
@@ -72,6 +75,44 @@ export class ProductController {
         const product = await this.productService.fetchAllProducts();
         return product;
     }
+
+    @Post(`${BASIC_SERVICE_ACTIONS.CREATE}/dummies/:amountToCreate`)
+    async createDummyProducts(@Param('amountToCreate') amountToCreate: number) {
+        console.log(`received request to create ${amountToCreate} dummy products`);
+
+        const productTypes = await this.productService.fetchAllProductTypes();
+        const manufacturers = await this.manufacturerService.fetchAllManufacturers();
+
+        const createdProducts = [];
+
+        for (let i = 0; i < amountToCreate; i++) {
+            const randomProductTypeIndex = Math.floor(Math.random() * productTypes.length);
+            const randomProductType = productTypes[randomProductTypeIndex];
+
+            const randomManufacturerIndex = Math.floor(Math.random() * manufacturers.length);
+            const randomManufacturer = manufacturers[randomManufacturerIndex];
+
+            const dummyProduct: ProductDetails = {
+                id: generateRandomString(6),
+                name: `Dummy Paper Product ${i + 1}`,
+                description: `Dummy paper product description ${i + 1}`,
+                price: Math.floor(Math.random() * 100) + 1,
+                productType: randomProductType,
+                size: `${Math.floor(Math.random() * 10) + 1}x${Math.floor(Math.random() * 10) + 1}`,
+                color: `Color ${i + 1}`,
+                weight: Math.floor(Math.random() * 5) + 1,
+                stock: Math.floor(Math.random() * 100) + 1,
+                alertStockNumber: Math.floor(Math.random() * 10) + 1,
+                manufacturer: randomManufacturer,
+            };
+
+            const created = await this.productService.createProduct(dummyProduct);
+            createdProducts.push(created);
+        }
+
+        return createdProducts;
+    }
+
 
     /** ======================================== */
 

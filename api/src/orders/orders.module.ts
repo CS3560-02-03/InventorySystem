@@ -8,10 +8,11 @@ import { ProductService } from 'src/products/services/products.service';
 import { Product } from 'src/utils/typeorm/entities/Product/Product';
 import { ProductType } from 'src/utils/typeorm/entities/Product/ProductType';
 import { OrderProduct } from 'src/utils/typeorm/entities/Orders/OrderProduct';
+import { Manufacturer } from 'src/utils/typeorm/entities/Manufacturer/Manufacturer';
 
 @Module({
     imports: [TypeOrmModule.forFeature([
-        Order, Product, ProductType, OrderProduct
+        Order, Product, ProductType, OrderProduct, Manufacturer
     ])],
     controllers: [OrderController],
     providers: [

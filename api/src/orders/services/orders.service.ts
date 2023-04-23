@@ -23,6 +23,7 @@ export class OrderService implements IOrderService {
         .leftJoinAndSelect('order.orderProducts', 'orderProduct')
         .leftJoinAndSelect('orderProduct.product', 'product')
         .leftJoinAndSelect('product.productType', 'productType')
+        .leftJoinAndSelect('product.manufacturer', 'manufacturer')
         .getMany();
     }
 
@@ -62,10 +63,12 @@ export class OrderService implements IOrderService {
     async findOrder(orderId: number): Promise<Order | undefined | null> {
         console.log('Find Order by ID:', orderId);
         const order = await this.orderRepo.createQueryBuilder('order')
-            .leftJoinAndSelect('order.products', 'product')
-            .leftJoinAndSelect('product.productType', 'productType')
-            .where({ id: orderId })
-            .getOne();
+        .leftJoinAndSelect('order.orderProducts', 'orderProduct')
+        .leftJoinAndSelect('orderProduct.product', 'product')
+        .leftJoinAndSelect('product.productType', 'productType')
+        .leftJoinAndSelect('product.manufacturer', 'manufacturer')
+        .where({ id: orderId })
+        .getOne();
         return order;
     }
 

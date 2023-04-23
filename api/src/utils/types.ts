@@ -32,6 +32,7 @@ export type ProductDetails = {
     stock: number,
     alertStockNumber: number;
     thumbnailURL?: string;
+    manufacturer: ManufacturerDetails
 }
 
 export type UpdateProductDetails = {
@@ -72,4 +73,11 @@ export type UpdateOrderDetails = {
     totalAmount?: number,
     status?: string,
     products?: ProductDetails[]
+}
+
+export type ManufacturerDetails = {
+    id?: number,
+    name: string,
+    phoneNumber: string,
+    email: string
 }

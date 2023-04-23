@@ -13,11 +13,15 @@ import {
 import { OrderDetails, UpdateOrderDetails } from 'src/utils/types';
 import { ROUTES, SERVICES, BASIC_SERVICE_ACTIONS } from '../../utils/constants';
 import { IOrderService } from '../intefaces/orders';
+import { IProductService } from 'src/products/interfaces/products';
+import { generateRandomString } from 'src/utils/misc/randomStringGenerator';
+import { Order } from 'src/utils/typeorm/entities/Orders/Order';
 
 @Controller(ROUTES.ORDER)
 export class OrderController {
     constructor(
         @Inject(SERVICES.ORDER) private readonly orderService: IOrderService,
+        @Inject(SERVICES.PRODUCT) private readonly productService: IProductService,
     ) {}
 
     @Get(':orderID/' + BASIC_SERVICE_ACTIONS.FIND)
@@ -39,44 +43,41 @@ export class OrderController {
         return created;
     }
 
-    @Post(`${BASIC_SERVICE_ACTIONS.CREATE}/dummy`)
-    async createDummyOrder() {
-        console.log(`received request to create dummy order`);
-        const orderDetails: OrderDetails = {
-            customerName: `jack`,
-            customerEmail: `jack@gmail.com`,
-            shippingAddress: `123 ave`,
-            totalAmount: 1.99,
-            status: `pending`,
-            orderProducts: [
-                {
-                    quantity: 1,
-                    purchasedPrice: 1.99,
-                    product: {
-                        stock: 20,
-                        alertStockNumber: 5,
-                        "id": "KCCCNW12",
-                        "name": "Cranes Crest ",
-                        "description": "Cranes Crest Natural White Imaging 8-1/2x11 24lb 500/pkg",
-                        "price": 77.04,
-                        "size": "8.5x11",
-                        "color": "Natural White",
-                        "weight": 24,
-                        "thumbnailURL": null,
-                        "productType": {
-                            "description": "Printing and writing papers are paper grades used for newspapers, magazines, catalogs, books, notebooks, commercial printing, business forms, stationeries, copying and digital printing. ",
-                            "thumbnailURL": "https://www.archroma.com/assets/uploads/images/Packaging-and-Paper/_750xAUTO_crop_center-center_80_none/shutterstock_336642893.jpg",
-                            "id": 9,
-                            "name": "Printing and writing paper"
-                        }
-                    },
-                },
-            ],
-            orderDate: new Date(),
-        }
-
-        const created = await this.orderService.createOrder(orderDetails);
-        return created;
+    @Post(`${BASIC_SERVICE_ACTIONS.CREATE}/dummies/:amountToCreate`)
+    async createDummyOrder(@Param('amountToCreate') amountToCreate: number) {
+        console.log(`received request to create ${amountToCreate} dummy orders`);
+        const allProducts = await this.productService.fetchAllProducts();
+        const createdOrder: Order[] = [];
+        for (let i = 0; i < amountToCreate; i++) {
+            const randomProductsCount = Math.floor(Math.random() * 5) + 1;
+            const selectedProducts = [];
+            
+            for (let i = 0; i < randomProductsCount; i++) {
+                const randomProductIndex = Math.floor(Math.random() * allProducts.length);
+                const randomProduct = allProducts[randomProductIndex];
+                const randomQuantity = Math.floor(Math.random() * 5) + 1;
+                selectedProducts.push({
+                    quantity: randomQuantity,
+                    purchasedPrice: randomProduct.price,
+                    product: randomProduct,
+                });
+            }
+        
+            const totalAmount = selectedProducts.reduce((total, item) => total + item.purchasedPrice * item.quantity, 0);
+            const orderDetails: OrderDetails = {
+                customerName: generateRandomString(5),
+                customerEmail: `${generateRandomString(5)}@gmail.com`,
+                shippingAddress: `${generateRandomString(3)} ${generateRandomString(4)} Ave`,
+                totalAmount: totalAmount,
+                status: Math.random() < 0.5 ? 'pending' : 'completed',
+                orderProducts: selectedProducts,
+                orderDate: new Date(),
+            };
+        
+            const created = await this.orderService.createOrder(orderDetails);
+            createdOrder.push(created)
+        }        
+        return createdOrder;
     }
 
     @Get(`:orderID/${BASIC_SERVICE_ACTIONS.DELETE}`)

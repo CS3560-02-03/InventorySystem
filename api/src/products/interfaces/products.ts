@@ -1,4 +1,5 @@
 import { Account } from "src/utils/typeorm/entities/Account";
+import { Manufacturer } from "src/utils/typeorm/entities/Manufacturer/Manufacturer";
 import { Product } from "src/utils/typeorm/entities/Product/Product";
 import { ProductType } from "src/utils/typeorm/entities/Product/ProductType";
 import { ProductDetails, ProductTypeDetails, UpdateProductDetails } from "src/utils/types";
