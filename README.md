@@ -54,4 +54,7 @@ Open your browser and navigate to `http://localhost:3000` to view the user inter
 
 ## Contribution
 
-Feel free to contribute to the project by submitting issues, bug reports, or pull requests. Your feedback and ideas are always welcome.
+- Nick Triance (@NickTriance)
+- Phuoc Khai (Jack) Nguyen (@bluesimp1102)
+- Justin Nguyen (@gary2245)
+- Hoang Tu Huynh (@hoangtuhuynh)
