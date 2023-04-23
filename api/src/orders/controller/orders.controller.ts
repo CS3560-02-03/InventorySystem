@@ -70,13 +70,10 @@ export class OrderController {
                             "name": "Printing and writing paper"
                         }
                     },
-                }
-            ]
+                },
+            ],
+            orderedDate: new Date(),
         }
-        // const existingOrder = await this.orderService.findOrder(orderDetails.id);
-        // if (existingOrder) {
-        //     throw new HttpException('Order already exists', HttpStatus.CONFLICT);
-        // }
 
         const created = await this.orderService.createOrder(orderDetails);
         return created;

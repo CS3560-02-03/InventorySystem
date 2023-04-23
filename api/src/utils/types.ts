@@ -54,7 +54,8 @@ export type OrderDetails = {
     shippingAddress: string,
     totalAmount: number,
     status: string,
-    orderProducts: OrderProductDetails[]
+    orderProducts: OrderProductDetails[],
+    orderedDate: Date,
 }
 
 export type OrderProductDetails = {

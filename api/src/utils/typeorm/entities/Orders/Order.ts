@@ -22,6 +22,9 @@ export class Order {
     @Column()
     status: string;
 
+    @CreateDateColumn({ type: 'timestamp' })
+    orderDate: Date;
+    
     @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.order)
     orderProducts: OrderProduct[];
 }
