@@ -52,9 +52,10 @@ The project uses the following main dependencies:
 
 Open your browser and navigate to `http://localhost:3000` to view the user interface.
 
-## Contribution
+## Contributors
 
-- Nick Triance (@NickTriance)
-- Phuoc Khai (Jack) Nguyen (@bluesimp1102)
-- Justin Nguyen (@gary2245)
-- Hoang Tu Huynh (@hoangtuhuynh)
+- Nick Triance - [@NickTriance](https://github.com/NickTriance)
+- Phuoc Khai (Jack) Nguyen - [@bluesimp1102](https://github.com/bluesimp1102)
+- Justin Nguyen - [@gary2245](https://github.com/gary2245)
+- Hoang Tu Huynh - [@hoangtuhuynh](https://github.com/hoangtuhuynh)
+- Otto Del Cid - data designer
