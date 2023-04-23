@@ -72,7 +72,7 @@ export class OrderController {
                     },
                 },
             ],
-            orderedDate: new Date(),
+            orderDate: new Date(),
         }
 
         const created = await this.orderService.createOrder(orderDetails);

@@ -11,16 +11,24 @@ const columns: GridColDef[] = [
     { field: 'status', headerName: 'Status', width: 120 },
     { field: 'totalAmount', headerName: 'Total Amount', type: 'number', width: 150 },
     {
+        field: 'orderDate',
+        headerName: 'Order Placed',
+        type: 'date',
+        width: 150,
+        valueGetter: (params) => {
+            const dateValue = Date.parse(params.value);
+            return isNaN(dateValue) ? "Invalid Date" : new Date(params.value);
+        },
+    },
+    {
         field: 'orderProducts',
         headerName: 'Products',
         width: 300,
         valueFormatter: (params) => {
-            console.log(params)
             const orderProducts = params.value as OrderProductDetails[];
             return orderProducts.map(orderProduct => `${orderProduct.quantity > 1 ? `${orderProduct.quantity}x ` : ``}${orderProduct.product.name}`).join(', ');
         },
     },
-
 ];
 
 type OrderDetailsTableProps = {
