@@ -42,6 +42,19 @@ The project uses the following main dependencies:
 1. Navigate to the `api` folder.
 2. Run `npm install` to install the required dependencies.
 3. Create a `.env` file in the root of the `api` folder with your MySQL database credentials and other environment variables.
+```
+# Server Settings
+PORT=3001
+
+# Session/Cookie Settings
+COOKIE_SECRET=asdasdasdasd
+
+MYSQL_DB_HOST=localhost
+MYSQL_DB_USERNAME=your_mysql_username
+MYSQL_DB_PASSWORD=your_mysql_password
+MYSQL_DB_DATABASE=your_mysql_database
+```
+
 4. Run `npm run start:dev` to start the development server.
 
 ### Web (ReactJS)
