@@ -6,7 +6,7 @@ import { AccountContext } from "../utils/contexts/AccountContext";
 
 const Branding = () => (
     <div className="navbar-branding">
-        <h4 className="navbar-brandname" />Dunder Mifflin Paper<h1 />
+        <h4 className="navbar-brandname" />Dunder Mifflin Paper Co.<h1 />
     </div>
 )
 
@@ -29,7 +29,7 @@ const NavigationLinks = () => {
             <li className="navbar-item" onClick={() => navigate("/contact")}>
                 Contact
             </li>
-            <div className="navbar-item nav-button is-light">Support Server</div>
+            <div className="navbar-item nav-button is-light">Support</div>
             <LogoutButton />
         </ul>
     );

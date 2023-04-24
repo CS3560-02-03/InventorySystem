@@ -2,3 +2,6 @@
 /api/dist
 
 /.metadata/
+api/.env
+.gitignore
+api/.env
