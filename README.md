@@ -71,4 +71,4 @@ Open your browser and navigate to `http://localhost:3000` to view the user inter
 - Phuoc Khai (Jack) Nguyen - [@bluesimp1102](https://github.com/bluesimp1102)
 - Justin Nguyen - [@gary2245](https://github.com/gary2245)
 - Hoang Tu Huynh - [@hoangtuhuynh](https://github.com/hoangtuhuynh)
-- Otto Del Cid - data designer
+- Otto Del Cid - [@OttoDel](https://github.com/OttoDel)
