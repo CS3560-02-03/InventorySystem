@@ -8,6 +8,7 @@ import { useFindAccount } from "../utils/hooks/accounts/useAccountExist";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AccountContext } from "../utils/contexts/AccountContext";
+import bcrypt from 'bcryptjs';
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({ username: "", password: "" });
@@ -28,21 +29,20 @@ const LoginPage = () => {
         try {
             const account = await findAccount(formData.username);
             // await checkAccountExist(formData.username);
-            if (account) {
-                // Account exists, check for password and redirect to dashboard
-                if (account.password === formData.password) {
-                    updateAccount(account); // Update the account context
-                    navigate("/dashboard");
-                } else {
-                    // alert("Wrong password");
-                    toast.error("Wrong password");
-                }
-    
-            } else {
-                // Account does not exist, show error message
-                // alert("No account with username " + formData.username);
-                toast.error(`No account with username ${formData.username}`);
+            
+            if (!account) {
+                toast.error("Invalid username or password.");
+                return;
             }
+            const passwordMatch = await bcrypt.compare(formData.password, account.password);
+            if (!passwordMatch) {
+                toast.error("Invalid username or password.")
+                return;
+            }
+            //Username and password are correct, log the user in.
+            updateAccount(account);
+            navigate("/dashboard");
+            
         } catch (error) {
             // console.error(error);
             // alert("An error occurred. Please try again later.\n\n" + error);

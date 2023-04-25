@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AccountContext } from "../utils/contexts/AccountContext";
 import { AccountDetails } from "../../../api/dist/utils/types";
+import bcrypt from 'bcryptjs';
 
 const SignupPage = () => {
     const [formData, setFormData] = useState({ username: "", password: "" });
@@ -33,9 +34,12 @@ const SignupPage = () => {
                 toast.error("Username already exists. Please choose a different username.");
                 return;
             }
+            const saltRounds = 10;
+            const salt = await bcrypt.genSalt(saltRounds);
+            const hash = await bcrypt.hash(formData.password, salt);
             let newAccount: AccountDetails = {
                 username: formData.username,
-                password: formData.password
+                password: hash
             };
             await createNewAccount(newAccount);
     
