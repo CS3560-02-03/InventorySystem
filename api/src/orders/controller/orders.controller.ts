@@ -18,14 +18,18 @@ import { generateRandomString } from 'src/utils/misc/randomStringGenerator';
 import { Order } from 'src/utils/typeorm/entities/Orders/Order';
 
 // NestJS controller for managing products. 
-//The controller contains various HTTP endpoints (GET, POST, PUT) for creating, retrieving, updating, and deleting products. Here is 
+//The controller contains various HTTP endpoints (GET, POST, PUT) for creating, retrieving, updating, and deleting products.
+// Controller triggered when path is /orders/... or /orders
 @Controller(ROUTES.ORDER)
 export class OrderController {
+    // constructs services from orders.services.ts to use in HTTP requests like @Get, @Post, etc
     constructor(
         @Inject(SERVICES.ORDER) private readonly orderService: IOrderService,
         @Inject(SERVICES.PRODUCT) private readonly productService: IProductService,
     ) {}
 
+    // if client sends Get request and path is /someOrderId/find
+    // return the corresponding order
     @Get(':orderID/' + BASIC_SERVICE_ACTIONS.FIND)
     async checkOrderExists(@Param('orderID') orderID: number) {
         console.log(`received request to check order with orderID, ${orderID}`);
@@ -33,6 +37,8 @@ export class OrderController {
         return order;
     }
 
+    // if client sends Post request and path is /create
+    // create an order
     @Post(BASIC_SERVICE_ACTIONS.CREATE)
     async createNewOrder(@Body(new ValidationPipe()) orderDetails: OrderDetails) {
         console.log(`received request to create new order`);
@@ -45,6 +51,8 @@ export class OrderController {
         return created;
     }
 
+    // if client sends Post request and path is /create/dummies/someAmountToCreate
+    // create random orders
     @Post(`${BASIC_SERVICE_ACTIONS.CREATE}/dummies/:amountToCreate`)
     async createDummyOrder(@Param('amountToCreate') amountToCreate: number) {
         console.log(`received request to create ${amountToCreate} dummy orders`);
@@ -82,6 +90,8 @@ export class OrderController {
         return createdOrder;
     }
 
+    // if client sends Get request and path is /someOrderId/delete
+    // delete the corresponding order
     @Get(`:orderID/${BASIC_SERVICE_ACTIONS.DELETE}`)
     async deleteOrderWithID(@Param('orderID') orderID: number) {
         console.log(`received request to delete order with orderID, ${orderID}`);
@@ -89,6 +99,8 @@ export class OrderController {
         return {deleted};
     }
 
+    // if client sends Put request and path is /someOrderID/update
+    // update corresponding order information
     @Put(':orderID/' + BASIC_SERVICE_ACTIONS.UPDATE)
     async updateOrder(
         @Param('orderID') orderID: number,
@@ -107,6 +119,8 @@ export class OrderController {
         }
     }
 
+    // if client sends Get request and path is /all
+    // return all orders
     @Get('all')
     async fetchAllOrders() {
         console.log(`received request to fetch all the orders`);
