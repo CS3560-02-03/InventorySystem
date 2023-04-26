@@ -10,11 +10,14 @@ import { ProductType } from 'src/utils/typeorm/entities/Product/ProductType';
 import { OrderProduct } from 'src/utils/typeorm/entities/Orders/OrderProduct';
 import { Manufacturer } from 'src/utils/typeorm/entities/Manufacturer/Manufacturer';
 
+// creates order module
 @Module({
+    // imports these ORM entities/ database tables
     imports: [TypeOrmModule.forFeature([
         Order, Product, ProductType, OrderProduct, Manufacturer
     ])],
     controllers: [OrderController],
+    // used in @Inject s
     providers: [
         {
             provide: SERVICES.ORDER,

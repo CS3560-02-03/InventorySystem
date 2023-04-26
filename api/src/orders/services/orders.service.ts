@@ -12,12 +12,14 @@ import { OrderProduct } from 'src/utils/typeorm/entities/Orders/OrderProduct';
 
 @Injectable()
 export class OrderService implements IOrderService {
+    // creates entities and links them to tables in database
     constructor(
         @InjectRepository(Order) private readonly orderRepo: Repository<Order>,
         @InjectRepository(OrderProduct) private readonly orderProductRepo: Repository<OrderProduct>,
         @Inject(SERVICES.PRODUCT) private readonly productService: IProductService,
     ) {}
 
+    // 
     async fetchAllOrders(): Promise<Order[]> {
         return await this.orderRepo.createQueryBuilder('order')
         .leftJoinAndSelect('order.orderProducts', 'orderProduct')
