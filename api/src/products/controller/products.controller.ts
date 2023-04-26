@@ -15,7 +15,9 @@ import { IProductService } from '../interfaces/products';
 import { ProductDetails, ProductTypeDetails, UpdateProductDetails, UpdateProductTypeDetails } from 'src/utils/types';
 import { IManufacturerService } from 'src/manufacturers/interfaces/manufacturers';
 import { generateRandomString } from 'src/utils/misc/randomStringGenerator';
-  
+
+// The controller contains various HTTP endpoints (GET, POST, PUT) 
+//for creating, retrieving, updating, and deleting products
 @Controller(ROUTES.PRODUCT)
 export class ProductController {
     constructor(
@@ -23,15 +25,19 @@ export class ProductController {
         @Inject(SERVICES.MANUFACTURER) private readonly manufacturerService: IManufacturerService,
     ) {}
 
-    // PRODUCTS  
+    // PRODUCTS
+    // Route decorator  
     @Get(`:productID/${BASIC_SERVICE_ACTIONS.FIND}`)
+
+    // function to check the product if it exists or not
     async checkProductExists(@Param('productID') productID: string) {
         console.log(`received request to check product with productID, ${productID}`);
         const product = await this.productService.findProduct(productID);
         return product;
     }
-  
+    // post request
     @Post(`${BASIC_SERVICE_ACTIONS.CREATE}`)
+    // the function to create the product
     async createNewProduct(@Body(new ValidationPipe()) productDetails: ProductDetails) {
         console.log(`received request to create new product`)
         const existingProduct = await this.productService.findProduct(productDetails.id);
