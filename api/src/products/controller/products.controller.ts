@@ -42,20 +42,21 @@ export class ProductController {
         console.log(`received request to create new product`)
         const existingProduct = await this.productService.findProduct(productDetails.id);
         if (existingProduct) {
-            throw new HttpException('Account already exists', HttpStatus.CONFLICT);
+            throw new HttpException('Product already exists', HttpStatus.CONFLICT);
         }
     
         const created = await this.productService.createProduct(productDetails);
         return created;
     }
 
+    // function to delete the product
     @Get(`:productID/delete`)
     async deleteProductWithID(@Param('productID') productID: string) {
         console.log(`received request to delete product with productID, ${productID}`);
         const deleted = await this.productService.deleteProductWithID(productID);
         return {deleted};
     }
-
+    // update the product with the new product and Put request
     @Put(`:productID/${BASIC_SERVICE_ACTIONS.UPDATE}`)
     async updateProduct(
         @Param('productID') productID: string,
@@ -64,6 +65,7 @@ export class ProductController {
         console.log(`received request to update product type with productID, ${productID}`);
         try {
             const product = await this.productService.findProduct(productID);
+            // if product does not exist , then throw an exception
             if (!product) {
                 throw new HttpException('Product Type doesn\'t exist', HttpStatus.CONFLICT);
             }
@@ -74,7 +76,7 @@ export class ProductController {
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
     }
-
+    // fetch all the data in database and return them as an array
     @Get(`all`)
     async fetchAllProducts() {
         console.log(`received request to fetch all the products`);
@@ -82,6 +84,8 @@ export class ProductController {
         return product;
     }
 
+    // create a specify number of dummy products in the database
+    //The function generates random numbers of product details for each dummy product and add it to the database
     @Post(`${BASIC_SERVICE_ACTIONS.CREATE}/dummies/:amountToCreate`)
     async createDummyProducts(@Param('amountToCreate') amountToCreate: number) {
         console.log(`received request to create ${amountToCreate} dummy products`);
@@ -129,26 +133,26 @@ export class ProductController {
         const productTypes = await this.productService.fetchAllProductTypes();
         return productTypes;
     }
-
+    // check the product type is existing or not    
     @Get(`type/:productTypeName/${BASIC_SERVICE_ACTIONS.FIND}`)
     async checkProductTypeExists(@Param('productTypeName') productTypeName: string) {
         console.log(`received request to check product type with productTypeID, ${productTypeName}`);
         const product = await this.productService.findProductType(productTypeName);
         return product;
     }
-
+    // create a new product type function for the specified
     @Post(`type/${BASIC_SERVICE_ACTIONS.CREATE}`)
     async createNewProductType(@Body(new ValidationPipe()) productTypeDetails: ProductTypeDetails) {
         console.log(`received request to create new product`)
         const existingProductType = await this.productService.findProductType(productTypeDetails.name);
         if (existingProductType) {
-            throw new HttpException('Account already exists', HttpStatus.CONFLICT);
+            throw new HttpException('Product already exists', HttpStatus.CONFLICT);
         }
     
         const createdProductType = await this.productService.createProductType(productTypeDetails);
         return createdProductType;
     }
-
+    // update the product type with PUT requests
     @Put(`type/:productTypeId/${BASIC_SERVICE_ACTIONS.UPDATE}`)
     async updateProductType(
         @Param('productTypeId') productTypeName: string,
@@ -166,14 +170,14 @@ export class ProductController {
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
     }
-
+    // delete product type functionality
     @Get(`type/:productTypeName/delete`)
     async deleteProductType(@Param('productTypeName') productTypeName: string) {
         console.log(`received request to delete product type with productName, ${productTypeName}`);
         const deleted = await this.productService.deleteProductType(productTypeName);
         return {deleted};
     }
-
+    // fetch all the name of product type from the database
     @Get(`type/:productTypeName/all`)
     async fetchAllProductsWithTypeName(@Param('productTypeName') productTypeName: string) {
         console.log(`received request to fetch all products with product type, ${productTypeName}`);

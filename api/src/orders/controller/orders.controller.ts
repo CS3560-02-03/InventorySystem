@@ -17,6 +17,8 @@ import { IProductService } from 'src/products/interfaces/products';
 import { generateRandomString } from 'src/utils/misc/randomStringGenerator';
 import { Order } from 'src/utils/typeorm/entities/Orders/Order';
 
+// NestJS controller for managing products. 
+//The controller contains various HTTP endpoints (GET, POST, PUT) for creating, retrieving, updating, and deleting products. Here is 
 @Controller(ROUTES.ORDER)
 export class OrderController {
     constructor(
