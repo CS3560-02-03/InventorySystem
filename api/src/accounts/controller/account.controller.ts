@@ -13,7 +13,7 @@ import { BASIC_SERVICE_ACTIONS, ROUTES, SERVICES } from '../../utils/constants';
 import { IAccountService } from '../interfaces/account';
 import { AccountDetails } from 'src/utils/types';
 
-// Controller is triggered when path is /accounts/...
+// Controller is triggered when path is /accounts/... or /accounts
 @Controller(ROUTES.ACCOUNT)
 export class AccountController {
     // creates instance of accountService from account.service.ts to use in HTTP requests like @Get
