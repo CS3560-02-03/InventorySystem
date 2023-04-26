@@ -25,11 +25,6 @@ const NavigationLinks = () => {
             <li className="navbar-item" onClick={() => navigate("/about")}>
                 About
             </li>
-    
-            <li className="navbar-item" onClick={() => navigate("/contact")}>
-                Contact
-            </li>
-            <div className="navbar-item nav-button is-light">Support</div>
             <LogoutButton />
         </ul>
     );
@@ -51,8 +46,8 @@ const AuthLinks = () => {
                 </div>
             </li>
             <li className="navbar-item">
-                <div className="navbar-item nav-button is-light" onClick={() => navigate('/home')}>
-                    Support Server
+                <div className="navbar-item nav-button is-light" onClick={() => navigate('/about')}>
+                    About
                 </div>
             </li>
         </ul>
