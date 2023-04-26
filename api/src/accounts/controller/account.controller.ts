@@ -12,15 +12,19 @@ import {
 import { BASIC_SERVICE_ACTIONS, ROUTES, SERVICES } from '../../utils/constants';
 import { IAccountService } from '../interfaces/account';
 import { AccountDetails } from 'src/utils/types';
-  
+
+// Controller is triggered when path is /accounts/...
 @Controller(ROUTES.ACCOUNT)
 export class AccountController {
+    // creates instance of accountService from account.service.ts to use in HTTP requests like @Get
     constructor(
         @Inject(SERVICES.ACCOUNT) private readonly accountService: IAccountService,
     ) {
         console.log(`here`)
     }
   
+    // if Get request sent by client and path is /someUsername/find,
+    // use accountService to find the account associated with the username
     @Get(`:username/${BASIC_SERVICE_ACTIONS.FIND}`)
     async checkUsernameExists(@Param('username') username: string) {
         console.log(`received request to check account, ${username}`);
@@ -28,6 +32,8 @@ export class AccountController {
         return account;
     }
   
+    // if Post request sent by client and path is /create
+    // use accountService to make a new account or throw error if account already exists
     @Post(`${BASIC_SERVICE_ACTIONS.CREATE}`)
     async createAccount(@Body(new ValidationPipe()) accountDetails: AccountDetails) {
         console.log(`received request to create new account`)
