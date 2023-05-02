@@ -2,7 +2,8 @@ export enum ROUTES {
     ACCOUNT = 'accounts',
     PRODUCT = 'products',
     ORDER = 'orders',
-    MANUFACTURER = 'manufacturers'
+    MANUFACTURER = 'manufacturers',
+    NOTIFICATION = 'notifications'
 }
   
 export enum SERVICES {
@@ -10,7 +11,7 @@ export enum SERVICES {
     PRODUCT = 'PRODUCT_SERVICE',
     ORDER = 'ORDER_SERVICE',
     MANUFACTURER = 'MANUFACTURER_SERVICE',
-    PRODUCT_TYPE_ATTRIBUTE = 'PRODUCT_TYPE_ATTRIBUTE_SERVICE',
+    NOTIFICATION = 'NOTIFICATION_SERVICE',
 }
 
 export enum BASIC_SERVICE_ACTIONS {
@@ -18,4 +19,9 @@ export enum BASIC_SERVICE_ACTIONS {
     CREATE = `create`,
     DELETE = `delete`,
     UPDATE = `update`
+}
+
+export enum SecurityLevel {
+    EMPLOYEE = 'employee',
+    MANAGER = 'manager',
 }

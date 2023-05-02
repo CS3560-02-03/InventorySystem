@@ -1,3 +1,5 @@
+import { SecurityLevel } from "./constants";
+
 export type AccountDetails = {
     username: string,
     password: string
@@ -81,3 +83,10 @@ export type ManufacturerDetails = {
     phoneNumber: string,
     email: string
 }
+
+export type NotificationDetails = {
+    id?: number;
+    content: string;
+    securityLevel: SecurityLevel;
+    sent: boolean;
+};
