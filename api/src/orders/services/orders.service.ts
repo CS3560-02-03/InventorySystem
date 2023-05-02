@@ -2,24 +2,26 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { OrderDetails, UpdateOrderDetails } from 'src/utils/types';
+import { NotificationDetails, OrderDetails, UpdateOrderDetails } from 'src/utils/types';
 import { IOrderService } from '../intefaces/orders';
 import { Order } from 'src/utils/typeorm/entities/Orders/Order';
 import { IProductService } from 'src/products/interfaces/products';
 import { SERVICES } from 'src/utils/constants';
 import { OrderProduct } from 'src/utils/typeorm/entities/Orders/OrderProduct';
+import { INotificationService } from 'src/notifications/interfaces/notifications';
+import { CustomNotification } from 'src/utils/typeorm/entities/Notifications/Notification';
+import { SecurityLevel } from 'src/utils/typeorm/entities/Notifications/Notification';
 
 
 @Injectable()
 export class OrderService implements IOrderService {
-    // creates entities and links them to tables in database
     constructor(
         @InjectRepository(Order) private readonly orderRepo: Repository<Order>,
         @InjectRepository(OrderProduct) private readonly orderProductRepo: Repository<OrderProduct>,
         @Inject(SERVICES.PRODUCT) private readonly productService: IProductService,
+        @Inject(SERVICES.NOTIFICATION) private readonly notificationService: INotificationService,
     ) {}
 
-    // 
     async fetchAllOrders(): Promise<Order[]> {
         return await this.orderRepo.createQueryBuilder('order')
         .leftJoinAndSelect('order.orderProducts', 'orderProduct')
@@ -56,7 +58,14 @@ export class OrderService implements IOrderService {
                 throw new Error(`Product with id ${orderProduct.product.id} not found`);
             }),
         );
-    
+        
+        let newNotification: NotificationDetails = {
+            content: `New order: $${savedOrder.totalAmount}`,
+            securityLevel: SecurityLevel.MANAGER,
+            sent: false
+        }
+        await this.notificationService.createNotification(newNotification);        
+
         // savedOrder.orderProducts = orderProducts;
     
         return savedOrder;

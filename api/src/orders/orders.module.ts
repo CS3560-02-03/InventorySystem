@@ -9,15 +9,14 @@ import { Product } from 'src/utils/typeorm/entities/Product/Product';
 import { ProductType } from 'src/utils/typeorm/entities/Product/ProductType';
 import { OrderProduct } from 'src/utils/typeorm/entities/Orders/OrderProduct';
 import { Manufacturer } from 'src/utils/typeorm/entities/Manufacturer/Manufacturer';
+import { CustomNotification } from 'src/utils/typeorm/entities/Notifications/Notification';
+import { NotificationService } from 'src/notifications/services/notifications.service';
 
-// creates order module
 @Module({
-    // imports these ORM entities/ database tables
     imports: [TypeOrmModule.forFeature([
-        Order, Product, ProductType, OrderProduct, Manufacturer
+        Order, Product, ProductType, OrderProduct, Manufacturer, CustomNotification
     ])],
     controllers: [OrderController],
-    // used in @Inject s
     providers: [
         {
             provide: SERVICES.ORDER,
@@ -26,6 +25,11 @@ import { Manufacturer } from 'src/utils/typeorm/entities/Manufacturer/Manufactur
         {
             provide: SERVICES.PRODUCT,
             useClass: ProductService,
+        },
+
+        {
+            provide: SERVICES.NOTIFICATION,
+            useClass: NotificationService,
         },
     ],
     exports: [
