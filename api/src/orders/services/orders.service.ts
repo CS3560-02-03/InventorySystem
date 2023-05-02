@@ -6,12 +6,10 @@ import { NotificationDetails, OrderDetails, UpdateOrderDetails } from 'src/utils
 import { IOrderService } from '../intefaces/orders';
 import { Order } from 'src/utils/typeorm/entities/Orders/Order';
 import { IProductService } from 'src/products/interfaces/products';
-import { SERVICES } from 'src/utils/constants';
+import { SERVICES, SecurityLevel } from 'src/utils/constants';
 import { OrderProduct } from 'src/utils/typeorm/entities/Orders/OrderProduct';
 import { INotificationService } from 'src/notifications/interfaces/notifications';
 import { CustomNotification } from 'src/utils/typeorm/entities/Notifications/Notification';
-import { SecurityLevel } from 'src/utils/typeorm/entities/Notifications/Notification';
-
 
 @Injectable()
 export class OrderService implements IOrderService {
@@ -59,6 +57,7 @@ export class OrderService implements IOrderService {
             }),
         );
         
+        // create new notification for the new order
         let newNotification: NotificationDetails = {
             content: `New order: $${savedOrder.totalAmount}`,
             securityLevel: SecurityLevel.MANAGER,

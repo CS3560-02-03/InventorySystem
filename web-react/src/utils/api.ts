@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { AccountDetails, ManufacturerDetails, OrderDetails, ProductDetails, ProductTypeDetails, UpdateOrderDetails, UpdateProductDetails, UpdateProductTypeDetails } from '../../../api/dist/utils/types';
+import { AccountDetails, ManufacturerDetails, NotificationDetails, OrderDetails, ProductDetails, ProductTypeDetails, UpdateOrderDetails, UpdateProductDetails, UpdateProductTypeDetails } from '../../../api/dist/utils/types';
 
 const CONFIG: AxiosRequestConfig = { withCredentials: true };
 
@@ -9,7 +9,8 @@ enum ROUTES {
     ACCOUNT = 'accounts',
     PRODUCT = 'products',
     ORDER = 'orders',
-    MANUFACTURER = 'manufacturers'
+    MANUFACTURER = 'manufacturers',
+    NOTIFICATION = 'notifications'
 }
 
 enum BASIC_SERVICES {
@@ -89,3 +90,16 @@ export const getFetchAllManufacturers = () =>
         `${API_URL}/${ROUTES.MANUFACTURER}/all`,
         CONFIG
     );
+
+// notifications
+export const getFetchAllNotifications = () =>
+    axios.get<NotificationDetails[]>(`${API_URL}/${ROUTES.NOTIFICATION}/all`, CONFIG);
+
+export const postCreateNotification = (newNotificationDetails: NotificationDetails) =>
+    axios.post<NotificationDetails>(`${API_URL}/${ROUTES.NOTIFICATION}/${BASIC_SERVICES.CREATE}`, newNotificationDetails, CONFIG);
+
+export const getFetchNewNotifications = () =>
+    axios.get<NotificationDetails[]>(`${API_URL}/${ROUTES.NOTIFICATION}/new`, CONFIG);
+
+export const putMarkNotified = (notificationId: number) =>
+    axios.put<{ success: boolean }>(`${API_URL}/${ROUTES.NOTIFICATION}/${notificationId}/mark-notified`, CONFIG);

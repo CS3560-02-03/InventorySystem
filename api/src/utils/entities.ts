@@ -1,5 +1,6 @@
 import { Account } from "./typeorm/entities/Account";
 import { Manufacturer } from "./typeorm/entities/Manufacturer/Manufacturer";
+import { CustomNotification } from "./typeorm/entities/Notifications/Notification";
 import { Order } from "./typeorm/entities/Orders/Order";
 import { OrderProduct } from "./typeorm/entities/Orders/OrderProduct";
 import { Product } from "./typeorm/entities/Product/Product";
@@ -11,5 +12,6 @@ export const entities = [
     ProductType,
     Order,
     OrderProduct,
-    Manufacturer
+    Manufacturer,
+    CustomNotification
 ];
