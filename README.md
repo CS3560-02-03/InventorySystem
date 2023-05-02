@@ -57,6 +57,8 @@ MYSQL_DB_DATABASE=your_mysql_database
 
 4. Run `npm run start:dev` to start the development server.
 
+A good Youtube video about NestJS that we all learned from: [NestJS Crash Course](https://www.youtube.com/watch?v=xzu3QXwo1BU)
+
 ### Web (ReactJS)
 
 1. Navigate to the `web-react` folder.
@@ -64,6 +66,26 @@ MYSQL_DB_DATABASE=your_mysql_database
 3. Run `npm start` to start the development server.
 
 Open your browser and navigate to `http://localhost:3000` to view the user interface.
+
+## To get started
+
+**First, create dummy Manufacturers data with POST request**
+```
+http://localhost:3001/api/manufacturers/create/dummies
+```
+
+**Then, create your product types**
+
+**To create mock products with POST request**
+```
+http://localhost:3001/api/products/create/dummies/{your desired  number of products}
+```
+
+**Create mock orders with POST request**
+```
+http://localhost:3001/api/orders/create/dummies/{your desired  number of orders}
+```
+
 
 ## Contributors
 
