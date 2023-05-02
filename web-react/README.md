@@ -41,16 +41,21 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## To get started
 
-First, create dummy Manufacturers data
+First, create dummy Manufacturers data with POST request
 ```
 http://localhost:3001/api/manufacturers/create/dummies
 ```
 
-Create your product types
+Then, create your product types
 
-Create dummy products with
+To create mock products with POST request
 ```
-http://localhost:3001/api/products/create/dummies/{your desired  number of product}
+http://localhost:3001/api/products/create/dummies/{your desired  number of products}
+```
+
+Create mock orders with POST request
+```
+http://localhost:3001/api/orders/create/dummies/{your desired  number of orders}
 ```
 
 ## Learn More
