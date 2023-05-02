@@ -16,7 +16,7 @@
     height: 20rem;
     padding: 1rem;
     margin: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(87, 219, 255, 0.414);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
@@ -25,7 +25,7 @@
     
 .dashboard-module:hover {
     transform: translateY(-0.2rem);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1rem 2rem rgba(87, 219, 255, 0.414);
 }
     
 .dashboard-module h3 {
