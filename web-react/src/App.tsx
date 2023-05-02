@@ -14,6 +14,7 @@ import { AccountDetails, ProductTypeDetails } from '../../api/dist/utils/types';
 import ProductsPage from './pages/modules/Products';
 import EditProductInfoPage from './pages/modules/EditProduct';
 import OrderManagerPage from './pages/modules/Orders';
+import AboutPage from './pages/About';
 
 function App() {
   const [account, setAccount] = useState<AccountDetails>();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/"  element={<HomePage />}/>
           <Route path="/login"  element={<LoginPage />}/>
           <Route path="/signup"  element={<SignupPage />}/>
+          <Route path="/about"  element={<AboutPage />}/>
           <Route path="/dashboard"  element={<DashboardPage />}/>
           <Route path="/modules/categories/"  element={<InventoryManagerPage />}/>
           <Route path="/modules/products/"  element={<ProductsPage />}/>
