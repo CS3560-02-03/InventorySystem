@@ -5,10 +5,7 @@ import {
     HttpException,
     HttpStatus,
     Inject,
-    Param,
     Post,
-    Put,
-    ValidationPipe,
 } from '@nestjs/common';
 import { ROUTES, SERVICES, BASIC_SERVICE_ACTIONS } from '../../utils/constants';
 import { IManufacturerService } from '../interfaces/manufacturers';

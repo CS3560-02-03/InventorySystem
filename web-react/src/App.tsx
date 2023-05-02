@@ -16,6 +16,7 @@ import EditProductInfoPage from './pages/modules/EditProduct';
 import OrderManagerPage from './pages/modules/Orders';
 import { useNotificationsAPI } from './utils/hooks/notifications/useNotificationsAPI';
 import { toast } from 'react-toastify';
+import AboutPage from './pages/About';
 
 function App() {
     const [account, setAccount] = useState<AccountDetails>();
@@ -53,6 +54,7 @@ function App() {
                 <Routes>
                     <Route path="/"  element={<HomePage />}/>
                     <Route path="/login"  element={<LoginPage />}/>
+                    <Route path="/about"  element={<AboutPage />}/>
                     <Route path="/signup"  element={<SignupPage />}/>
                     <Route path="/dashboard"  element={<DashboardPage />}/>
                     <Route path="/modules/categories/"  element={<InventoryManagerPage />}/>
