@@ -6,6 +6,7 @@ import { AccountModule } from './accounts/account.module';
 import { ProductModule } from './products/products.module';
 import { OrderModule } from './orders/orders.module';
 import { ManufacturerModule } from './manufacturers/manufacturers.module';
+import { NotificationModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { ManufacturerModule } from './manufacturers/manufacturers.module';
     ProductModule,
     AccountModule,
     OrderModule,
-    ManufacturerModule
+    ManufacturerModule,
+    NotificationModule
   ],
   controllers: [],
   providers: [],
