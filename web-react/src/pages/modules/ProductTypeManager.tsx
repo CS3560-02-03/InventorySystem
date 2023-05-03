@@ -201,7 +201,7 @@ const ProductTypeManager = () => {
                 >
                     <Tab value="details" label="Details" />
                     <Tab value="products" label={`Products (${productsDetails.length})`} />
-                    {loadingOrders ? <div></div> : <Tab value="orders" label={`Orders (${orders.filter(order => order.orderProducts[0].product.productType.name === productType?.name).length})`} />}
+                    {loadingOrders ? <div></div> : <Tab value="orders" label={`Orders (${orders.filter(order => order.orderProducts.some(orderProduct => orderProduct.product.productType.id === productType?.id)).length})`} />}
                     
                 </Tabs>
             </Box>
@@ -371,7 +371,7 @@ const ProductTypeManager = () => {
                 }/>
             </div>
             :
-            <OrderDetailsTable orderDetails={orders.filter(order => order.orderProducts[0].product.productType.name === productType?.name)} onDelete={handleDeleteOrders}/>
+            <OrderDetailsTable orderDetails={orders.filter(order => order.orderProducts.some(orderProduct => orderProduct.product.productType.id === productType?.id))} onDelete={handleDeleteOrders}/>
             }
             </React.Fragment>
             

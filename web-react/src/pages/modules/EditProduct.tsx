@@ -85,25 +85,27 @@ const EditProductInfoPage = () => {
 
     const {orders, loading: loadingOrders, refreshAllOrders} = useFetchAllOrders();
 
-    const handleDeleteOrders = async (selectedIds: GridRowSelectionModel) => {
-        selectedIds.forEach(async (selectedID) => {
-            // const selectProduct = await findProduct(selectedID.toString());
-            // if (!selectProduct) {
-            //     toast.error(`Can't find product with ID ${selectedID.toString()}`)
-            //     return;
-            // }
-            
-            // const productDeleted = await deleteProductWithProductID(selectedID.toString())
-            // if (!productDeleted) {
-            //     toast.error(`Can't delete product with ID ${selectedID.toString()}`)
-            //     return;  
-            // } 
-            // toast.success(`Deleted product with ID ${selectedID.toString()}`)
-            // // Refresh the product list
-            // await refreshProductsWithTypeName(productType?.name ?? ``);
-            // setProducts([...products])
-        })
+    const { findProduct, createProduct, deleteProduct: deleteProductWithProductID } = useProductAPI();
+
+    const handleDeleteProduct = async () => {
+        if (!productId) return;
+        const selectProduct = await findProduct(productId);
+        if (!selectProduct) {
+            toast.error(`Can't find product with ID ${productId}`)
+            return;
+        }
+        
+        const productDeleted = await deleteProductWithProductID(productId)
+        if (!productDeleted) {
+            toast.error(`Can't delete product with ID ${productId}`)
+            return;  
+        } 
+        toast.success(`Deleted product with ID ${productId}`)
+        // Refresh the product list
+        navigate(`/modules/products`)
     }
+
+    const handleDeleteOrders = async (selectedIds: GridRowSelectionModel) => {}
     return (
         <div>
             <PageHeader />
@@ -158,22 +160,7 @@ const EditProductInfoPage = () => {
                                 variant="filled"
                                 defaultValue={product.name}
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== event.target.value || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setName(event.target.value)
                                     changedDetails.name = event.target.value;
-                                    if (changedDetails.name === product.name) {
-                                        // changedDetails.name == undefined;
-                                    }
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
                                 required
@@ -203,18 +190,6 @@ const EditProductInfoPage = () => {
                                 }}
                                 variant="filled"
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== event.target.value || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setPrice(event.target.value)
                                     changedDetails.price = parseFloat(event.target.value)
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -238,18 +213,6 @@ const EditProductInfoPage = () => {
                                 variant="filled"
                                 defaultValue={product.size}
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== event.target.value || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setSize(event.target.value)
                                     changedDetails.size = event.target.value
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -311,18 +274,6 @@ const EditProductInfoPage = () => {
                                 }}
                                 variant="filled"
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== event.target.value || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setWeight(event.target.value)
                                     changedDetails.weight = parseFloat(event.target.value)
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -349,18 +300,6 @@ const EditProductInfoPage = () => {
                                 }}
                                 variant="filled"
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== event.target.value || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setStock(event.target.value)
                                     changedDetails.stock = parseInt(event.target.value)
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -387,18 +326,6 @@ const EditProductInfoPage = () => {
                                 }}
                                 variant="filled"
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== event.target.value || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setAlertStockNumber(event.target.value)
                                     changedDetails.alertStockNumber = parseInt(event.target.value)
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -422,18 +349,6 @@ const EditProductInfoPage = () => {
                                 variant="filled"
                                 defaultValue={product.description}
                                 onChange={(event) =>{
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== event.target.value || 
-                                    //     product.thumbnailURL !== thumbnailURL
-                                    // )
-                                    // setDescription(event.target.value)
                                     changedDetails.description = event.target.value;
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -456,23 +371,8 @@ const EditProductInfoPage = () => {
                                 id="filled-textarea"
                                 label="Thumbnail"
                                 defaultValue={product.thumbnailURL ||  product.productType.thumbnailURL || `https://www.postcardsrus.com/userfiles/images/paper.jpg`}
-                                // placeholder="Enter the description for the Product category"
-                                // multiline
                                 variant="filled"
-                                // required
                                 onChange={(event) => {
-                                    // setDataChanged(
-                                    //     product.name !== name || 
-                                    //     String(product.price) !== price || 
-                                    //     product.size !== size || 
-                                    //     product.color !== color || 
-                                    //     String(product.weight) !== weight || 
-                                    //     String(product.stock) !== stock || 
-                                    //     String(product.alertStockNumber) !== alertStockNumber || 
-                                    //     String(product.description) !== description || 
-                                    //     product.thumbnailURL !== event.target.value
-                                    // )
-                                    // setThumbnailURL(event.target.value)
                                     changedDetails.thumbnailURL = event.target.value;
                                     setDataChanged(changedDetails !== dummyProductUpdateDetails)
                                 }}
@@ -492,7 +392,7 @@ const EditProductInfoPage = () => {
                         <a 
                             className="button is-info" 
                             style={{margin: '10px'}}
-                            onClick={() => {}}>
+                            onClick={handleDeleteProduct}>
                             <FaTrashAlt />
                             Delete
                         </a>

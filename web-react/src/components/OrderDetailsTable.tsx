@@ -26,6 +26,7 @@ const columns: GridColDef[] = [
         width: 300,
         valueFormatter: (params) => {
             const orderProducts = params.value as OrderProductDetails[];
+            // console.log(orderProducts)
             return orderProducts.map(orderProduct => `${orderProduct.quantity > 1 ? `${orderProduct.quantity}x ` : ``}${orderProduct.product.name}`).join(', ');
         },
     },
