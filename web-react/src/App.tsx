@@ -30,7 +30,7 @@ function App() {
         if (account) {
             // Map the newNotifications array to an array of promises
             const notificationPromises = newNotifications.map(async (notification) => {
-                console.log(notification)
+                // console.log(notification)
                 toast.info(notification.content);
                 await markNotified(notification.id ?? 0);
             });
