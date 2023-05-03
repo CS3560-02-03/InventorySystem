@@ -47,6 +47,22 @@ export class OrderService implements IOrderService {
                     let newOrderProduct = new OrderProduct();
                     newOrderProduct.order = savedOrder;
                     newOrderProduct.product = product;
+                    
+                    // Subtract the chosen quantity from the stock
+                    const newStock = product.stock - orderProduct.quantity;
+                    // Update the product with the new stock using the productService
+                    await this.productService.updateProduct(product, { stock: newStock });
+                    // Check the alert stock # (low stock limit)
+                    if (newStock <= product.alertStockNumber) {
+                        // create new notification for the new order
+                        let newNotification: NotificationDetails = {
+                            content: `Low stock alert\nProduct ${product.id} - ${product.name}: ${newStock} left.`,
+                            securityLevel: SecurityLevel.MANAGER,
+                            sent: false
+                        }
+                        await this.notificationService.createNotification(newNotification);
+                    }
+                    
                     newOrderProduct.quantity = orderProduct.quantity;
                     newOrderProduct.purchasedPrice = orderProduct.purchasedPrice;
             
@@ -60,7 +76,7 @@ export class OrderService implements IOrderService {
         // create new notification for the new order
         let newNotification: NotificationDetails = {
             content: `New order: $${savedOrder.totalAmount}`,
-            securityLevel: SecurityLevel.MANAGER,
+            securityLevel: SecurityLevel.EMPLOYEE,
             sent: false
         }
         await this.notificationService.createNotification(newNotification);        
@@ -68,7 +84,7 @@ export class OrderService implements IOrderService {
         // savedOrder.orderProducts = orderProducts;
     
         return savedOrder;
-      }
+    }
 
     async findOrder(orderId: number): Promise<Order | undefined | null> {
         console.log('Find Order by ID:', orderId);

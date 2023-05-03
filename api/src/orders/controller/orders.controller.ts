@@ -55,7 +55,9 @@ export class OrderController {
             for (let i = 0; i < randomProductsCount; i++) {
                 const randomProductIndex = Math.floor(Math.random() * allProducts.length);
                 const randomProduct = allProducts[randomProductIndex];
-                const randomQuantity = Math.floor(Math.random() * 5) + 1;
+
+                const maxQuantity = randomProduct.stock;
+                const randomQuantity = Math.floor(Math.random() * maxQuantity) + 1;
                 selectedProducts.push({
                     quantity: randomQuantity,
                     purchasedPrice: randomProduct.price,
