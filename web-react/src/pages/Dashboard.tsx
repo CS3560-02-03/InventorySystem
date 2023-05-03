@@ -42,7 +42,7 @@ const DashboardPage = () => {
         if (!account) {
             navigate("/login");
         }
-    }, [account, navigate]);
+    }, [account]);
 
     return (
         <div>

@@ -42,7 +42,7 @@ const InventoryManagerPage = () => {
         } else {
             setCategories(productTypes);
         }
-    }, [account, navigate]);
+    });
 
     const handleAddCategory = async () => {
         if (name === '') {

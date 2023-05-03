@@ -4,11 +4,14 @@ import "../../src/css_styles/page.css";
 import { useContext } from "react";
 import { AccountContext } from "../utils/contexts/AccountContext";
 
-const Branding = () => (
-    <div className="navbar-branding">
-        <h4 className="navbar-brandname" />Dunder Mifflin Paper Co.<h1 />
-    </div>
-)
+const Branding = () => {
+    return (
+    
+        <div className="navbar-branding" >
+            <h4 className="navbar-brandname" />Dunder Mifflin Paper Co.<h1 />
+        </div>
+    )
+}
 
 const NavigationLinks = () => {
     const navigate = useNavigate();
